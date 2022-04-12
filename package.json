@@ -1,0 +1,26 @@
+{
+  "name": "fantasy-home",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "ant-design-vue": "^2.2.8",
+    "axios": "^0.26.1",
+    "pinia": "^2.0.0-rc.10",
+    "qs": "^6.10.3",
+    "vue": "^3.2.25",
+    "vue-router": "4.0.13",
+    "wangeditor": "^4.7.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.2.0",
+    "sass": "^1.49.9",
+    "unplugin-vue-components": "^0.18.5",
+    "vite": "^2.8.0",
+    "vite-plugin-compression": "^0.5.1"
+  }
+}

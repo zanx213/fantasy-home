@@ -1,0 +1,6 @@
+export { default as Action } from './Action/index.vue'
+export { default as BaseTable } from './BaseTable/index.vue'
+export { default as FormModal } from './FormModal/index.vue'
+export { default as Select } from './Select/index.vue'
+export { default as TableMenu } from './TableMenu/index.vue'
+export { default as UploadImage } from './UploadImage/index.vue'
