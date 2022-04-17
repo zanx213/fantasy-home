@@ -32,7 +32,8 @@ const search = reactive({
   // city: '',
   // area: '',
   address: '',
-  brand_id: undefined,
+  // brand_id: undefined,
+  brand_name: '',
   car_model: '',
   membrane_type: '',
   number: '',
@@ -270,16 +271,20 @@ const onSearch = () => {
       <a-input v-model:value="search.address" placeholder="请输入" />
     </a-form-item>
     <a-form-item label="品牌" :labelCol="{ span: 5 }">
-      <Select
+      <a-input v-model:value="search.brand_name" placeholder="请输入" />
+      <!-- <Select
         v-model:value="search.brand_id"
         :options="brandList"
         label="name"
         val="id"
         placeholder="请选择车辆品牌"
-      />
+      /> -->
     </a-form-item>
     <a-form-item label="车型" :labelCol="{ span: 5 }">
       <a-input v-model:value="search.car_model" placeholder="请输入" />
+    </a-form-item>
+    <a-form-item label="膜的种类" :labelCol="{ span: 5 }">
+      <a-input v-model:value="search.membrane_type" placeholder="请输入" />
     </a-form-item>
     <a-form-item label="装贴时间范围" :labelCol="{ span: 5 }">
       <a-range-picker

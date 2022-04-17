@@ -19,6 +19,10 @@ export default defineComponent({
     rowKey: {
       type: String,
       default: 'id'
+    },
+    pagination: {
+      type: Boolean,
+      default: true
     }
   },
   emits: ['change'],
@@ -61,7 +65,7 @@ export default defineComponent({
         {
           dataSource: props.dataSource,
           columns: props.columns,
-          pagination: pagination,
+          pagination: props.pagination ? pagination : false,
           rowKey: props.rowKey
         },
         slots

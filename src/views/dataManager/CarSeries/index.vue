@@ -214,13 +214,6 @@ function handleAdd() {
     <template #logo="{ record }">
       <a-image :width="50" :src="record.logo" />
     </template>
-    <template #switch="{ record }">
-      <a-switch
-        checked-children="开"
-        un-checked-children="关"
-        v-model:checked="record.open"
-      />
-    </template>
     <template #action="{ record }">
       <a-button type="primary" ghost size="small" @click="handleEdit(record)">
         修改

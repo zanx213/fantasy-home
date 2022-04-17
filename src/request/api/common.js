@@ -24,6 +24,9 @@ const common = {
     return axios.get(
       `/api/admin/carSeriesPrice/carSeryList?${qs.stringify(params)}`
     )
+  },
+  getAuthMenu(params) {
+    return axios.get(`/api/admin/auth/menu?${qs.stringify(params)}`)
   }
 }
 

@@ -45,9 +45,12 @@ const formState = reactive({
 })
 
 const getUser = () => {
-  api.common.getUser().then(res => {
-    const data = res.data
-    localStorage.setItem('user', JSON.stringify(data))
+  return new Promise(resolve => {
+    api.common.getUser().then(res => {
+      const data = res.data
+      localStorage.setItem('user', JSON.stringify(data))
+      resolve()
+    })
   })
 }
 
@@ -59,12 +62,12 @@ const submit = () => {
       username: formState.username,
       password: formState.password
     })
-    .then(res => {
+    .then(async res => {
       if (res.code === 0) {
         message.success('登录成功')
-        router.push('/')
         localStorage.setItem('token', res.data.access_token)
-        getUser()
+        await getUser()
+        router.push('/')
       } else {
         message.error(res.msg)
       }

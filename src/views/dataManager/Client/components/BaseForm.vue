@@ -54,7 +54,8 @@ const formState = reactive({
   phone: '',
   region: [],
   address: '',
-  brand_id: undefined,
+  // brand_id: undefined,
+  brand_name: '',
   car_model: '',
   year: '',
   frame_number: '',
@@ -269,13 +270,19 @@ const getProtectiveFilmList = () => {
     <a-form-item label="详细地址" name="address">
       <a-input v-model:value="formState.address" placeholder="请输入详细地址" />
     </a-form-item>
-    <a-form-item label="车辆品牌" name="brand_id">
+    <!-- <a-form-item label="车辆品牌" name="brand_id">
       <Select
         v-model:value="formState.brand_id"
         :options="brandList"
         label="name"
         val="id"
         placeholder="请选择车辆品牌"
+      />
+    </a-form-item> -->
+    <a-form-item label="车辆品牌" name="brand_name">
+      <a-input
+        v-model:value="formState.brand_name"
+        placeholder="请输入车辆品牌"
       />
     </a-form-item>
     <a-form-item label="装贴车型" name="car_model">
@@ -309,17 +316,17 @@ const getProtectiveFilmList = () => {
       <a-input v-model:value="formState.local" placeholder="请输入局部" />
     </a-form-item>
     <a-form-item label="膜的种类" name="membrane_type">
-      <!-- <a-input
+      <a-input
         v-model:value="formState.membrane_type"
         placeholder="请输入膜的种类"
-      /> -->
-      <Select
+      />
+      <!-- <Select
         v-model:value="formState.membrane_type"
         :options="protectiveFilmList"
         label="name"
         val="name"
         placeholder="请选择膜的种类"
-      />
+      /> -->
     </a-form-item>
     <a-form-item label="膜卷号" name="number">
       <a-input v-model:value="formState.number" placeholder="请输入膜卷号" />

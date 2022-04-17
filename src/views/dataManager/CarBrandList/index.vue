@@ -256,13 +256,6 @@ const modalTitle = computed(() => {
     <template #logo="{ record }">
       <a-image class="columns-img" :src="record.logo" />
     </template>
-    <template #switch="{ record }">
-      <a-switch
-        checked-children="开"
-        un-checked-children="关"
-        v-model:checked="record.status"
-      />
-    </template>
     <template #action="{ record }">
       <a-button type="primary" ghost size="small" @click="handleEdit(record)">
         修改

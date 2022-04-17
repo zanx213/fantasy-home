@@ -1,7 +1,6 @@
 <script setup>
-import { reactive, ref, createVNode } from 'vue'
+import { reactive, ref, createVNode, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { getColumnsNum } from '@/utils'
 import { message, Modal } from 'ant-design-vue'
 import { BaseTable, TableMenu } from '@/components'
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue'
@@ -9,12 +8,7 @@ import { ExclamationCircleOutlined } from '@ant-design/icons-vue'
 import api from '@/request/api'
 
 const router = useRouter()
-const pagination = reactive({
-  current: 0,
-  pageSize: 0
-})
 
-const total = ref(0)
 const list = ref([])
 
 const columns = [
@@ -24,15 +18,26 @@ const columns = [
     slots: { customRender: 'index' }
   },
   {
-    title: '名称',
-    dataIndex: 'name'
+    title: '用户名',
+    dataIndex: 'username'
   },
   {
-    title: '图片',
-    key: 'image',
-    class: 'columns-image',
-    slots: { customRender: 'image' }
+    title: '角色名称',
+    dataIndex: 'role_name'
   },
+  {
+    title: '最近登录时间',
+    dataIndex: 'login_time_last'
+  },
+  {
+    title: '更新时间',
+    dataIndex: 'updated_at'
+  },
+  // {
+  //   title: '是否启用',
+  //   key: 'switch',
+  //   slots: { customRender: 'switch' }
+  // },
   {
     title: '操作',
     key: 'action',
@@ -40,41 +45,32 @@ const columns = [
   }
 ]
 
-const getList = () => {
-  api.paint
-    .getProtectiveFilmList({
-      page: pagination.current,
-      limit: pagination.pageSize
-    })
-    .then(res => {
-      if (res.code !== 0) return message.error(res.msg)
-      list.value = res.data.list
-      total.value = res.data.total_num
-    })
-}
-
-// 翻页
-const onTableChange = ({ current, pageSize }) => {
-  pagination.current = current
-  pagination.pageSize = pageSize
+onMounted(() => {
   getList()
+})
+
+const getList = () => {
+  api.authority.getUserList().then(res => {
+    if (res.code !== 0) return message.error(res.msg)
+    list.value = res.data
+  })
 }
 
 function handleAdd() {
-  router.push({ name: 'PaintProtectiveFilmAdd' })
+  router.push({ name: 'AdminAdd' })
 }
 
 function handleEdit({ id }) {
   router.push({
-    name: 'PaintProtectiveFilmAdd',
+    name: 'AdminAdd',
     query: {
       id
     }
   })
 }
 
-const delProtectiveFilm = id => {
-  api.paint.protectiveFilmDel({ id }).then(res => {
+const delUser = id => {
+  api.authority.delUser({ id }).then(res => {
     if (res.code === 0) {
       message.success('删除成功')
       const idx = list.value.findIndex(item => item.id === id)
@@ -90,7 +86,7 @@ const handleDel = ({ id }) => {
     icon: () => createVNode(ExclamationCircleOutlined),
     content: () => '是否确认删除该条数据？',
     onOk() {
-      delProtectiveFilm(id)
+      delUser(id)
     }
   })
 }
@@ -99,18 +95,21 @@ const handleDel = ({ id }) => {
 <template>
   <TableMenu @add="handleAdd" />
 
-  <BaseTable
-    :dataSource="list"
-    :columns="columns"
-    :total="total"
-    @change="onTableChange"
-  >
+  <BaseTable :dataSource="list" :columns="columns" :pagination="false">
     <template #index="{ index }">
-      {{ getColumnsNum(pagination, index) }}
+      {{ index + 1 }}
     </template>
     <template #image="{ record }">
       <a-image class="columns-img" :src="record.image" />
     </template>
+    <!-- <template #switch="{ record }">
+      <a-switch
+        checked-children="开"
+        un-checked-children="关"
+        :checked="record.status === 0"
+        @change="onSwitchChange"
+      />
+    </template> -->
     <template #action="{ record }">
       <a-button type="primary" ghost size="small" @click="handleEdit(record)">
         修改

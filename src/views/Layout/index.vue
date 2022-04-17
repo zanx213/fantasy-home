@@ -10,9 +10,11 @@ import {
   DownOutlined
 } from '@ant-design/icons-vue'
 import { message } from 'ant-design-vue'
+import api from '@/request/api'
 
 const router = useRouter()
 
+const userMenus = ref([])
 const users = ref(null)
 const collapsed = ref(false) // 折叠菜单
 const selectedKeys = ref(['ClientList']) // 选中的菜单
@@ -63,7 +65,45 @@ const onMenuClick = ({ key }) => {
   }
 }
 
-onMounted(() => getCache())
+const getAuthMenu = () => {
+  api.common.getAuthMenu().then(res => {
+    const data = res.data.reverse() // 后端返回的菜单数据
+    const _menus = [] // 前端菜单
+    menus.forEach(({ children, ...args }) => {
+      _menus.push(args)
+      if (Array.isArray(children) && children.length > 0) {
+        children.forEach(child => _menus.push(child))
+      }
+    })
+
+    const newArr = []
+    data.forEach(({ name, all_children }) => {
+      let obj = null
+      const _children = []
+      const idx = _menus.findIndex(v => v.name === name)
+      if (idx > -1) {
+        obj = _menus[idx]
+        if (Array.isArray(all_children) && all_children.length > 0) {
+          all_children.forEach(item => {
+            const idx2 = _menus.findIndex(v => v.name === item.name)
+            if (idx2 > -1) {
+              _children.push(_menus[idx2])
+            }
+          })
+          obj.children = _children
+        }
+        newArr.push(obj)
+      }
+    })
+
+    userMenus.value = newArr
+  })
+}
+
+onMounted(() => {
+  getCache()
+  getAuthMenu()
+})
 
 window.addEventListener('beforeunload', () => setCache())
 </script>
@@ -89,7 +129,7 @@ window.addEventListener('beforeunload', () => setCache())
         @click="handleMenuItem"
         @openChange="onOpenChange"
       >
-        <a-sub-menu v-for="menu in menus" :key="menu.key">
+        <a-sub-menu v-for="menu in userMenus" :key="menu.key">
           <template #title>
             <span class="sub-menu-title">
               <Component :is="menu.icon" />

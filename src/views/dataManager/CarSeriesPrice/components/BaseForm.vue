@@ -246,6 +246,8 @@ const update = () => {
     if (res.code === 0) {
       message.success('操作成功')
       goBack()
+    } else {
+      message.error(res.msg)
     }
   })
 }

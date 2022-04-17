@@ -68,6 +68,26 @@ const routes = [
         path: '/website',
         name: 'Website',
         component: () => import('@/views/pageManager/Website/index.vue')
+      },
+      {
+        path: '/adminList',
+        name: 'AdminList',
+        component: () => import('@/views/authorityManager/Admin/index.vue')
+      },
+      {
+        path: '/adminAdd',
+        name: 'AdminAdd',
+        component: () => import('@/views/authorityManager/Admin/add.vue')
+      },
+      {
+        path: '/roleList',
+        name: 'RoleList',
+        component: () => import('@/views/authorityManager/Role/index.vue')
+      },
+      {
+        path: '/roleAdd',
+        name: 'RoleAdd',
+        component: () => import('@/views/authorityManager/Role/add.vue')
       }
     ]
   },

@@ -62,13 +62,13 @@ const menuList = [
         name: '管理员列表'
       },
       {
-        key: 'RoleManager',
+        key: 'RoleList',
         name: '角色管理'
-      },
-      {
-        key: 'AuthorityManager',
-        name: '权限管理'
       }
+      // {
+      //   key: 'RuleList',
+      //   name: '权限列表'
+      // }
     ]
   }
 ]
