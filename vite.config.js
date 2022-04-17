@@ -32,15 +32,4 @@ export default defineConfig({
       }
     }
   }
-
-  // 代理
-  // server: {
-  //   proxy: {
-  //     '/api': {
-  //       target: 'http://81.70.234.149:9002',
-  //       changeOrigin: true
-  //       // rewrite: path => path.replace(/^\/api/, '/api')
-  //     }
-  //   }
-  // }
 })
