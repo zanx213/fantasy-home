@@ -8,7 +8,7 @@ import pageAPi from '@/request/api/page'
 const action = import.meta.env.VITE_APP_BASE_URL + common.uploadImage()
 const editor = ref(null)
 onMounted(() => {
-  editor.value = new E('#editor')
+  editor.value = new E('#editor-service')
   createEditor()
   getService()
 })
