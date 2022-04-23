@@ -7,8 +7,9 @@ import pageAPi from '@/request/api/page'
 
 const action = import.meta.env.VITE_APP_BASE_URL + common.uploadImage()
 const editor = ref(null)
+const editorJoin = ref(null)
 onMounted(() => {
-  editor.value = new E('#editor-join')
+  editor.value = new E(editorJoin.value)
   createEditor()
   getJoin()
 })
@@ -67,7 +68,7 @@ function onSave() {
       <span>设置关于品牌页面</span>
       <a-button type="primary" @click="onSave">保存</a-button>
     </div>
-    <div id="editor"></div>
+    <div ref="editorJoin"></div>
   </div>
 </template>
 

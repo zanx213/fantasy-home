@@ -7,8 +7,9 @@ import pageAPi from '@/request/api/page'
 
 const action = import.meta.env.VITE_APP_BASE_URL + common.uploadImage()
 const editor = ref(null)
+const editorService = ref(null)
 onMounted(() => {
-  editor.value = new E('#editor-service')
+  editor.value = new E(editorService.value)
   createEditor()
   getService()
 })
@@ -67,7 +68,7 @@ function onSave() {
       <span>设置服务页面</span>
       <a-button type="primary" @click="onSave">保存</a-button>
     </div>
-    <div id="editor"></div>
+    <div ref="editorService"></div>
   </div>
 </template>
 

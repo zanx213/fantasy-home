@@ -97,6 +97,13 @@ const rules = {
       trigger: 'change'
     }
   ],
+  brand_name: [
+    {
+      required: true,
+      message: '请输入车辆品牌',
+      trigger: 'blur'
+    }
+  ],
   membrane_type: [
     {
       required: true,
@@ -155,7 +162,7 @@ const getInfo = () => {
         ? [data.city, data.area]
         : [data.province, data.city, data.area]
     formState.address = data.address
-    formState.brand_id = data.brand_id
+    formState.brand_name = data.brand_name
     formState.car_model = data.car_model
     formState.year = data.year
     formState.frame_number = data.frame_number
