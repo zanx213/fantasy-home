@@ -65,7 +65,7 @@ function onSave() {
 <template>
   <div class="service">
     <div class="title">
-      <span>设置关于品牌页面</span>
+      <span>设置加盟咨询页面</span>
       <a-button type="primary" @click="onSave">保存</a-button>
     </div>
     <div ref="editorJoin"></div>

@@ -38,11 +38,6 @@ const fileList = computed({
 
 // 点击预览
 const handlePreview = async file => {
-  console.log(
-    '%c [ file ]-39',
-    'font-size:13px; background:pink; color:#bf2c9f;',
-    file
-  )
   if (!file.url && !file.preview) {
     file.preview = await getBase64(file.originFileObj)
   }
