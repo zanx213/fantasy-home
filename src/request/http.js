@@ -23,7 +23,6 @@ const tip = msg => {
 }
 
 const toLogin = () => {
-  console.log('[ 123 ] >', 123)
   router.replace({ name: 'Login' })
 }
 

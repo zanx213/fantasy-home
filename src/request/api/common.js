@@ -5,6 +5,9 @@ const common = {
   login(params) {
     return axios.post('/api/admin/auth/login', qs.stringify(params))
   },
+  uploadImage2(params, config) {
+    return axios.post('/api/admin/images', params, config)
+  },
   uploadImage() {
     return '/api/admin/images'
   },
