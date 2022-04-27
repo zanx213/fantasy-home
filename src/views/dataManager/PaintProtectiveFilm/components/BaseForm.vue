@@ -156,6 +156,7 @@ const getProtectiveFilmInfo = () => {
 const protectiveFilmUpdate = () => {
   const params = deepClone(toRaw(formState))
   params.image = params.image[0].response.data
+  if (props.id) params.id = props.id
   api.paint.protectiveFilmUpdate(params).then(res => {
     if (res.code === 0) {
       message.success('操作成功')

@@ -62,7 +62,7 @@ const beforeUpload = (file, list) => {
   return new Promise((resolve, reject) => {
     const afterMax = list.length + fileList.value.length
     const max = maxCount.value
-    if (max <= afterMax) {
+    if (max < afterMax) {
       message.error(`最多上传${max}张图片`)
       return reject()
     }
